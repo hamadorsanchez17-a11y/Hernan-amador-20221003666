@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CinePlusPlus.API/CinePlusPlus.API.csproj" />
+  <Project Path="CinePlusPlus.Application/CinePlusPlus.Application.csproj" />
+  <Project Path="CinePlusPlus.Domain/CinePlusPlus.Domain.csproj" />
+  <Project Path="CinePlusPlus.Infrastructure/CinePlusPlus.Infrastructure.csproj" />
+</Solution>

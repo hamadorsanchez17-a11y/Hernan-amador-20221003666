@@ -1,0 +1,6 @@
+@CinePlusPlus.API_HostAddress = http://localhost:5001
+
+GET {{CinePlusPlus.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
