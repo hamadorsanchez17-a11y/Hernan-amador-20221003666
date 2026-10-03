@@ -1,0 +1,16 @@
+﻿services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: cineplusplus-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: cineplusplus
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - cineplusplus_data:/var/lib/postgresql/data
+
+volumes:
+  cineplusplus_data:

@@ -1,21 +1,15 @@
-﻿using CinePlusPlus.Application.Interfaces;
-using CinePlusPlus.Domain;
-using CinePlusPlus.Infrastructure.Data;
+﻿using CinePlusPlus.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace CinePlusPlus.Infrastructure.Repositories;
+namespace CinePlusPlus.Infrastructure.Data;
 
-public class PeliculaRepository : IPeliculaRepository
+public class CinePlusPlusDbContext : DbContext
 {
-    private readonly CinePlusPlusDbContext _context;
-
-    public PeliculaRepository(CinePlusPlusDbContext context)
+    public CinePlusPlusDbContext(
+        DbContextOptions<CinePlusPlusDbContext> options)
+        : base(options)
     {
-        _context = context;
     }
 
-    public async Task<IEnumerable<Pelicula>> GetAllAsync()
-    {
-        return await _context.Peliculas.ToListAsync();
-    }
+    public DbSet<Pelicula> Peliculas { get; set; }
 }

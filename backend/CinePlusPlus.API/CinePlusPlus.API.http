@@ -1,6 +1,42 @@
-@CinePlusPlus.API_HostAddress = http://localhost:5001
-
-GET {{CinePlusPlus.API_HostAddress}}/weatherforecast/
+### Obtener todas las películas
+GET http://localhost:5001/api/peliculas
 Accept: application/json
 
 ###
+
+### Obtener película por ID
+GET http://localhost:5001/api/peliculas/1
+Accept: application/json
+
+###
+
+### Crear película
+POST http://localhost:5001/api/peliculas
+Content-Type: application/json
+
+{
+  "titulo": "Interestelar",
+  "anio": 2014,
+  "genero": "Ciencia ficción",
+  "vista": true,
+  "calificacion": 10
+}
+
+###
+
+### Actualizar película
+PUT http://localhost:5001/api/peliculas/1
+Content-Type: application/json
+
+{
+  "titulo": "Interestelar",
+  "anio": 2014,
+  "genero": "Ciencia ficción",
+  "vista": true,
+  "calificacion": 10
+}
+
+###
+
+### Eliminar película
+DELETE http://localhost:5001/api/peliculas/1
