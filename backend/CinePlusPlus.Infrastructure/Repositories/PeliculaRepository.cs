@@ -32,15 +32,34 @@ public class PeliculaRepository : IPeliculaRepository
         return pelicula;
     }
 
+    
     public async Task UpdateAsync(Pelicula pelicula)
     {
-        _context.Peliculas.Update(pelicula);
+        var existente = await _context.Peliculas
+            .FindAsync(pelicula.IdPelicula);
+
+        if (existente == null)
+            throw new KeyNotFoundException("Película no encontrada.");
+
+        existente.Titulo = pelicula.Titulo;
+        existente.Anio = pelicula.Anio;
+        existente.Genero = pelicula.Genero;
+        existente.Vista = pelicula.Vista;
+        existente.Calificacion = pelicula.Calificacion;
+
         await _context.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(Pelicula pelicula)
     {
-        _context.Peliculas.Remove(pelicula);
+        var existente = await _context.Peliculas
+            .FindAsync(pelicula.IdPelicula);
+
+        if (existente == null)
+            throw new KeyNotFoundException("Película no encontrada.");
+
+        _context.Peliculas.Remove(existente);
         await _context.SaveChangesAsync();
     }
+
 }
