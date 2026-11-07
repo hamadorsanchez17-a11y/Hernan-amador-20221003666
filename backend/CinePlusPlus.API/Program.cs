@@ -13,9 +13,21 @@ builder.Services.AddInfrastructure(connectionString);
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PoliticaCors", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+app.UseCors("PoliticaCors");
 
 if (app.Environment.IsDevelopment())
 {

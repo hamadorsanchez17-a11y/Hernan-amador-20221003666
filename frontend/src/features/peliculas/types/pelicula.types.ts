@@ -7,4 +7,5 @@
     anio: number;
     imagen: string;
     descripcion: string;
+    calificacion: number;
 }

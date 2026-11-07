@@ -39,6 +39,9 @@ function PeliculaCard({ pelicula }: PeliculaCardProps) {
                     <span>{pelicula.duracion} min</span>
                     <span>{pelicula.clasificacion}</span>
                 </div>
+
+                <span>⭐ {pelicula.calificacion}/10</span>
+                
             </div>
 
         </article>
