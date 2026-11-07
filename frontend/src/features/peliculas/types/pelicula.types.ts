@@ -1,11 +1,16 @@
 ﻿export interface Pelicula {
-    id: number;
+    idPelicula: number;
     titulo: string;
-    genero: string;
-    duracion: number;
-    clasificacion: string;
     anio: number;
-    imagen: string;
-    descripcion: string;
+    genero: string;
+    vista: boolean;
+    calificacion: number;
+}
+
+export interface CrearPeliculaDto {
+    titulo: string;
+    anio: number;
+    genero: string;
+    vista: boolean;
     calificacion: number;
 }

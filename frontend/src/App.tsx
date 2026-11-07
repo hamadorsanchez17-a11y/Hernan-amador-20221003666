@@ -1,9 +1,15 @@
+
 import { useEffect, useState } from 'react';
 
 import AppLayout from './layouts/AppLayout';
 import PeliculaCard from './features/peliculas/components/PeliculaCard';
+import CrearPeliculaForm from './features/peliculas/components/CrearPeliculaForm';
 
-import { obtenerPeliculas } from './features/peliculas/api/peliculasApi';
+import {
+    obtenerPeliculas,
+    eliminarPelicula,
+    extraerMensajeError
+} from './features/peliculas/api/peliculasApi';
 
 import type { Pelicula } from './features/peliculas/types/pelicula.types';
 
@@ -11,13 +17,27 @@ function App() {
     const [peliculas, setPeliculas] = useState<Pelicula[]>([]);
     const [busqueda, setBusqueda] = useState('');
     const [cargando, setCargando] = useState(true);
+    const [errorCarga, setErrorCarga] = useState('');
+    const [errorEliminar, setErrorEliminar] = useState('');
+    const [peliculaEditar, setPeliculaEditar] = useState<Pelicula | null>(null);
 
     useEffect(() => {
-        const cargarPeliculas = () => {
-            const datos = obtenerPeliculas();
+        const cargarPeliculas = async () => {
+            try {
+                setCargando(true);
+                setErrorCarga('');
 
-            setPeliculas(datos);
-            setCargando(false);
+                const datos = await obtenerPeliculas();
+
+                setPeliculas(datos);
+            } catch (error) {
+                console.error('Error al cargar películas:', error);
+                setErrorCarga(
+                    'No fue posible cargar las películas. Intenta nuevamente.'
+                );
+            } finally {
+                setCargando(false);
+            }
         };
 
         cargarPeliculas();
@@ -26,6 +46,38 @@ function App() {
     const peliculasFiltradas = peliculas.filter((pelicula) =>
         pelicula.titulo.toLowerCase().includes(busqueda.toLowerCase())
     );
+
+    const manejarEliminarPelicula = async (idPelicula: number) => {
+        try {
+            setErrorEliminar('');
+
+            await eliminarPelicula(idPelicula);
+
+            setPeliculas((anteriores) =>
+                anteriores.filter(
+                    (pelicula) => pelicula.idPelicula !== idPelicula
+                )
+            );
+
+            if (peliculaEditar?.idPelicula === idPelicula) {
+                setPeliculaEditar(null);
+            }
+        } catch (error) {
+            setErrorEliminar(extraerMensajeError(error));
+        }
+    };
+
+    const manejarPeliculaActualizada = (peliculaActualizada: Pelicula) => {
+        setPeliculas((anteriores) =>
+            anteriores.map((pelicula) =>
+                pelicula.idPelicula === peliculaActualizada.idPelicula
+                    ? peliculaActualizada
+                    : pelicula
+            )
+        );
+
+        setPeliculaEditar(null);
+    };
 
     return (
         <AppLayout>
@@ -45,12 +97,27 @@ function App() {
                 </p>
             </section>
 
+            <CrearPeliculaForm
+                onPeliculaCreada={(nuevaPelicula) => {
+                    setPeliculas((anteriores) => [
+                        ...anteriores,
+                        nuevaPelicula
+                    ]);
+                }}
+                peliculaEditar={peliculaEditar}
+                onPeliculaActualizada={manejarPeliculaActualizada}
+                onCancelarEdicion={() => setPeliculaEditar(null)}
+            />
+
             <section>
 
                 <div className="flex flex-col md:flex-row justify-between gap-5 mb-8">
 
                     <div>
-                        <h2 className="text-2xl font-bold">Nuestro catálogo</h2>
+                        <h2 className="text-2xl font-bold">
+                            Nuestro catálogo
+                        </h2>
+
                         <p className="text-slate-400 text-sm mt-1">
                             Explorá las películas disponibles.
                         </p>
@@ -66,8 +133,20 @@ function App() {
 
                 </div>
 
+                {errorEliminar && (
+                    <p className="text-red-400 mb-4">
+                        {errorEliminar}
+                    </p>
+                )}
+
                 {cargando ? (
-                    <p className="text-slate-400">Cargando películas...</p>
+                    <p className="text-slate-400">
+                        Cargando películas...
+                    </p>
+                ) : errorCarga ? (
+                    <p className="text-red-400">
+                        {errorCarga}
+                    </p>
                 ) : peliculasFiltradas.length === 0 ? (
                     <p className="text-slate-400">
                         No encontramos películas con ese nombre.
@@ -78,8 +157,10 @@ function App() {
 
                         {peliculasFiltradas.map((pelicula) => (
                             <PeliculaCard
-                                key={pelicula.id}
+                                key={pelicula.idPelicula}
                                 pelicula={pelicula}
+                                onEliminar={manejarEliminarPelicula}
+                                onEditar={setPeliculaEditar}
                             />
                         ))}
 
