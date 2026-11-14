@@ -2,6 +2,7 @@
 using FluentValidation;
 
 namespace CinePlusPlus.Application.Features.Peliculas.Validators;
+
 public class CreatePeliculaValidator : AbstractValidator<CreatePeliculaRequestDto>
 {
     public CreatePeliculaValidator()
@@ -19,6 +20,14 @@ public class CreatePeliculaValidator : AbstractValidator<CreatePeliculaRequestDt
             .InclusiveBetween(1888, 2100);
 
         RuleFor(x => x.Calificacion)
-            .InclusiveBetween(0, 10);
+            .InclusiveBetween(0m, 10m);
+
+        RuleFor(x => x.ImagenUrl)
+            .Must(url =>
+                string.IsNullOrWhiteSpace(url) ||
+                (Uri.TryCreate(url, UriKind.Absolute, out var uri) &&
+                 (uri.Scheme == Uri.UriSchemeHttp ||
+                  uri.Scheme == Uri.UriSchemeHttps)))
+            .WithMessage("La URL de la imagen no es válida.");
     }
 }

@@ -43,6 +43,18 @@ function App() {
         cargarPeliculas();
     }, []);
 
+    // Desplazarse automáticamente al formulario cuando se selecciona Editar.
+    useEffect(() => {
+        if (peliculaEditar) {
+            document
+                .getElementById('formulario-pelicula')
+                ?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+        }
+    }, [peliculaEditar]);
+
     const peliculasFiltradas = peliculas.filter((pelicula) =>
         pelicula.titulo.toLowerCase().includes(busqueda.toLowerCase())
     );

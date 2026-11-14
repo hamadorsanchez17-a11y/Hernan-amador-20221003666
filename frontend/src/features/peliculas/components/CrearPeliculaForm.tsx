@@ -43,7 +43,8 @@ function CrearPeliculaForm({
             anio: new Date().getFullYear(),
             genero: '',
             vista: false,
-            calificacion: 0
+            calificacion: 0,
+            imagenUrl: ''
         }
     });
 
@@ -57,7 +58,8 @@ function CrearPeliculaForm({
                 anio: peliculaEditar.anio,
                 genero: peliculaEditar.genero,
                 vista: peliculaEditar.vista,
-                calificacion: peliculaEditar.calificacion
+                calificacion: peliculaEditar.calificacion,
+                imagenUrl: peliculaEditar.imagenUrl ?? ''
             });
         } else {
             reset({
@@ -65,7 +67,8 @@ function CrearPeliculaForm({
                 anio: new Date().getFullYear(),
                 genero: '',
                 vista: false,
-                calificacion: 0
+                calificacion: 0,
+                imagenUrl: ''
             });
         }
 
@@ -78,10 +81,15 @@ function CrearPeliculaForm({
         setMensaje('');
 
         try {
+            const datosPelicula = {
+                ...datos,
+                imagenUrl: datos.imagenUrl.trim() || null
+            };
+
             if (peliculaEditar) {
                 const peliculaActualizada = await actualizarPelicula(
                     peliculaEditar.idPelicula,
-                    datos
+                    datosPelicula
                 );
 
                 onPeliculaActualizada(peliculaActualizada);
@@ -92,7 +100,7 @@ function CrearPeliculaForm({
 
                 onCancelarEdicion();
             } else {
-                const nuevaPelicula = await crearPelicula(datos);
+                const nuevaPelicula = await crearPelicula(datosPelicula);
 
                 onPeliculaCreada(nuevaPelicula);
 
@@ -108,8 +116,10 @@ function CrearPeliculaForm({
     };
 
     return (
-        <section className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-10">
-
+        <section
+            id="formulario-pelicula"
+            className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-10"
+        >
             <h2 className="text-2xl font-bold text-white mb-6">
                 {peliculaEditar ? 'Editar película' : 'Registrar película'}
             </h2>
@@ -186,7 +196,8 @@ function CrearPeliculaForm({
                         type="number"
                         min="0"
                         max="10"
-                        step="1"
+                        step="0.1"
+                        placeholder="Ej. 8.5"
                         className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white outline-none focus:border-red-500"
                     />
 
@@ -195,6 +206,29 @@ function CrearPeliculaForm({
                             {errors.calificacion.message}
                         </p>
                     )}
+                </div>
+
+                <div>
+                    <label className="block text-sm text-slate-300 mb-2">
+                        URL de la portada
+                    </label>
+
+                    <input
+                        {...register('imagenUrl')}
+                        type="url"
+                        placeholder="https://ejemplo.com/portada.jpg"
+                        className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white outline-none focus:border-red-500"
+                    />
+
+                    {errors.imagenUrl && (
+                        <p className="text-red-400 text-sm mt-1">
+                            {errors.imagenUrl.message}
+                        </p>
+                    )}
+
+                    <p className="text-xs text-slate-500 mt-2">
+                        Puedes dejar este campo vacío si no tienes una portada.
+                    </p>
                 </div>
 
                 <div className="flex items-center gap-3">

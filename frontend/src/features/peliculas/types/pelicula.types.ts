@@ -5,6 +5,7 @@
     genero: string;
     vista: boolean;
     calificacion: number;
+    imagenUrl: string | null;
 }
 
 export interface CrearPeliculaDto {
@@ -13,4 +14,5 @@ export interface CrearPeliculaDto {
     genero: string;
     vista: boolean;
     calificacion: number;
+    imagenUrl: string | null;
 }

@@ -1,4 +1,5 @@
 ﻿
+import { useState } from 'react';
 import type { Pelicula } from '../types/pelicula.types';
 
 interface PeliculaCardProps {
@@ -12,6 +13,8 @@ function PeliculaCard({
                           onEliminar,
                           onEditar
                       }: PeliculaCardProps) {
+
+    const [errorImagen, setErrorImagen] = useState(false);
 
     const manejarEliminar = () => {
         const confirmar = window.confirm(
@@ -27,10 +30,22 @@ function PeliculaCard({
         <article className="group overflow-hidden rounded-xl bg-slate-900 border border-slate-800 hover:border-red-500 transition duration-300">
 
             <div className="aspect-[2/3] overflow-hidden flex items-center justify-center bg-slate-800">
-                <span className="text-6xl">🎬</span>
+
+                {pelicula.imagenUrl && !errorImagen ? (
+                    <img
+                        src={pelicula.imagenUrl}
+                        alt={`Portada de ${pelicula.titulo}`}
+                        onError={() => setErrorImagen(true)}
+                        className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                    />
+                ) : (
+                    <span className="text-6xl">🎬</span>
+                )}
+
             </div>
 
             <div className="p-4">
+
                 <div className="flex justify-between items-center mb-2">
                     <span className="text-xs text-red-400 font-semibold">
                         {pelicula.genero}
@@ -76,6 +91,7 @@ function PeliculaCard({
                         Eliminar
                     </button>
                 </div>
+
             </div>
 
         </article>

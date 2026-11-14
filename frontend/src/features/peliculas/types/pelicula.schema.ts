@@ -1,5 +1,4 @@
-﻿
-import { z } from 'zod';
+﻿import { z } from 'zod';
 
 export const crearPeliculaSchema = z.object({
     titulo: z.string()
@@ -20,9 +19,15 @@ export const crearPeliculaSchema = z.object({
     vista: z.boolean(),
 
     calificacion: z.number()
-        .int('La calificación debe ser un número entero.')
         .min(0, 'La calificación mínima es 0.')
-        .max(10, 'La calificación máxima es 10.')
+        .max(10, 'La calificación máxima es 10.'),
+
+    imagenUrl: z.string()
+        .trim()
+        .refine(
+            (url) => url === '' || z.string().url().safeParse(url).success,
+            'Introduce una URL de imagen válida.'
+        )
 });
 
 export type CrearPeliculaFormData = z.infer<typeof crearPeliculaSchema>;

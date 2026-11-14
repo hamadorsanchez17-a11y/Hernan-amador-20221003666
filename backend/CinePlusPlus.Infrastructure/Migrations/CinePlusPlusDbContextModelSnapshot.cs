@@ -32,11 +32,14 @@ namespace CinePlusPlus.Infrastructure.Migrations
                     b.Property<int>("Anio")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Calificacion")
-                        .HasColumnType("integer");
+                    b.Property<decimal>("Calificacion")
+                        .HasColumnType("numeric");
 
                     b.Property<string>("Genero")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImagenUrl")
                         .HasColumnType("text");
 
                     b.Property<string>("Titulo")

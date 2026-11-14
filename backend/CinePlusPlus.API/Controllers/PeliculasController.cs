@@ -1,4 +1,5 @@
-﻿using CinePlusPlus.Application.Features.Peliculas.DTOs;
+﻿
+using CinePlusPlus.Application.Features.Peliculas.DTOs;
 using CinePlusPlus.Application.Interfaces;
 using CinePlusPlus.Domain;
 using FluentValidation;
@@ -36,7 +37,8 @@ public class PeliculasController : ControllerBase
             Anio = p.Anio,
             Genero = p.Genero,
             Vista = p.Vista,
-            Calificacion = p.Calificacion
+            Calificacion = p.Calificacion,
+            ImagenUrl = p.ImagenUrl
         });
 
         return Ok(response);
@@ -57,7 +59,8 @@ public class PeliculasController : ControllerBase
             Anio = pelicula.Anio,
             Genero = pelicula.Genero,
             Vista = pelicula.Vista,
-            Calificacion = pelicula.Calificacion
+            Calificacion = pelicula.Calificacion,
+            ImagenUrl = pelicula.ImagenUrl
         };
 
         return Ok(response);
@@ -79,7 +82,8 @@ public class PeliculasController : ControllerBase
             Anio = request.Anio,
             Genero = request.Genero,
             Vista = request.Vista,
-            Calificacion = request.Calificacion
+            Calificacion = request.Calificacion,
+            ImagenUrl = request.ImagenUrl
         };
 
         var peliculaCreada = await _repository.AddAsync(pelicula);
@@ -91,7 +95,8 @@ public class PeliculasController : ControllerBase
             Anio = peliculaCreada.Anio,
             Genero = peliculaCreada.Genero,
             Vista = peliculaCreada.Vista,
-            Calificacion = peliculaCreada.Calificacion
+            Calificacion = peliculaCreada.Calificacion,
+            ImagenUrl = peliculaCreada.ImagenUrl
         };
 
         return CreatedAtAction(
@@ -121,10 +126,22 @@ public class PeliculasController : ControllerBase
         pelicula.Genero = request.Genero;
         pelicula.Vista = request.Vista;
         pelicula.Calificacion = request.Calificacion;
+        pelicula.ImagenUrl = request.ImagenUrl;
 
         await _repository.UpdateAsync(pelicula);
 
-        return NoContent();
+        var response = new PeliculaResponseDto
+        {
+            IdPelicula = pelicula.IdPelicula,
+            Titulo = pelicula.Titulo,
+            Anio = pelicula.Anio,
+            Genero = pelicula.Genero,
+            Vista = pelicula.Vista,
+            Calificacion = pelicula.Calificacion,
+            ImagenUrl = pelicula.ImagenUrl
+        };
+
+        return Ok(response);
     }
 
     [HttpDelete("{id}")]
