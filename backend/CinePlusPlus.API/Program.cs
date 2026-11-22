@@ -1,3 +1,4 @@
+
 using CinePlusPlus.Application;
 using CinePlusPlus.Infrastructure;
 
@@ -13,11 +14,15 @@ builder.Services.AddInfrastructure(connectionString);
 
 builder.Services.AddControllers();
 
+var origenesPermitidos = builder.Configuration
+    .GetSection("Cors:AllowedOrigins")
+    .Get<string[]>() ?? new[] { "http://localhost:5173" };
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("PoliticaCors", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins(origenesPermitidos)
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
