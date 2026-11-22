@@ -70,13 +70,13 @@ function PeliculaCard({
                     </span>
                     
                 </div>
-                
+
                 <div className="bg-slate-800/70 border border-slate-700 rounded-lg p-3 mb-3 h-36 overflow-hidden">
                     <h4 className="text-xs font-semibold text-slate-300 mb-2">
                         SINOPSIS
                     </h4>
 
-                    <p className="text-xs text-slate-400 leading-relaxed line-clamp-7">
+                    <p className="text-xs text-slate-400 leading-relaxed max-h-24 overflow-y-auto pr-1">
                         {pelicula.sinopsis || 'Sin sinopsis disponible.'}
                     </p>
                 </div>
