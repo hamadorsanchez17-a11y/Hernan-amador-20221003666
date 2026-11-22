@@ -76,7 +76,7 @@ function PeliculaCard({
                         SINOPSIS
                     </h4>
 
-                    <p className="text-xs text-slate-400 leading-relaxed max-h-24 overflow-y-auto pr-1">
+                    <p className="text-xs text-slate-400 leading-relaxed max-h-24 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-600/40 scrollbar-track-transparent hover:scrollbar-thumb-slate-500/60">
                         {pelicula.sinopsis || 'Sin sinopsis disponible.'}
                     </p>
                 </div>
