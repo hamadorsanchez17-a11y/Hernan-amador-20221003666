@@ -22,6 +22,10 @@ public class CreatePeliculaValidator : AbstractValidator<CreatePeliculaRequestDt
         RuleFor(x => x.Calificacion)
             .InclusiveBetween(0m, 10m);
 
+		RuleFor(x => x.Sinopsis)
+    .MaximumLength(500)
+    .WithMessage("La sinopsis no puede superar los 500 caracteres.");
+
         RuleFor(x => x.ImagenUrl)
             .Must(url =>
                 string.IsNullOrWhiteSpace(url) ||
@@ -30,4 +34,5 @@ public class CreatePeliculaValidator : AbstractValidator<CreatePeliculaRequestDt
                   uri.Scheme == Uri.UriSchemeHttps)))
             .WithMessage("La URL de la imagen no es válida.");
     }
+
 }

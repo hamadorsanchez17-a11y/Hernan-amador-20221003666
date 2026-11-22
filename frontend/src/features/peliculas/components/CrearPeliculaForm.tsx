@@ -44,6 +44,7 @@ function CrearPeliculaForm({
             genero: '',
             vista: false,
             calificacion: 0,
+            sinopsis: '',
             imagenUrl: ''
         }
     });
@@ -59,6 +60,7 @@ function CrearPeliculaForm({
                 genero: peliculaEditar.genero,
                 vista: peliculaEditar.vista,
                 calificacion: peliculaEditar.calificacion,
+                sinopsis: peliculaEditar.sinopsis ?? '',
                 imagenUrl: peliculaEditar.imagenUrl ?? ''
             });
         } else {
@@ -68,6 +70,7 @@ function CrearPeliculaForm({
                 genero: '',
                 vista: false,
                 calificacion: 0,
+                sinopsis: '',
                 imagenUrl: ''
             });
         }
@@ -83,6 +86,7 @@ function CrearPeliculaForm({
         try {
             const datosPelicula = {
                 ...datos,
+                sinopsis: datos.sinopsis.trim() || null,
                 imagenUrl: datos.imagenUrl.trim() || null
             };
 
@@ -207,7 +211,31 @@ function CrearPeliculaForm({
                         </p>
                     )}
                 </div>
+                
+                <div>
+                    <label className="block text-sm text-slate-300 mb-2">
+                        Sinopsis (opcional)
+                    </label>
 
+                    <textarea
+                        {...register('sinopsis')}
+                        rows={4}
+                        maxLength={500}
+                        placeholder="Escribe una breve descripción de la película..."
+                        className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white outline-none focus:border-red-500 resize-y"
+                    />
+
+                    {errors.sinopsis && (
+                        <p className="text-red-400 text-sm mt-1">
+                            {errors.sinopsis.message}
+                        </p>
+                    )}
+
+                    <p className="text-xs text-slate-500 mt-2">
+                        Máximo 500 caracteres. Puedes dejar este campo vacío.
+                    </p>
+                </div>
+                
                 <div>
                     <label className="block text-sm text-slate-300 mb-2">
                         URL de la portada

@@ -5,6 +5,7 @@
     genero: string;
     vista: boolean;
     calificacion: number;
+    sinopsis: string | null;
     imagenUrl: string | null;
 }
 
@@ -14,5 +15,6 @@ export interface CrearPeliculaDto {
     genero: string;
     vista: boolean;
     calificacion: number;
+    sinopsis: string | null;
     imagenUrl: string | null;
 }

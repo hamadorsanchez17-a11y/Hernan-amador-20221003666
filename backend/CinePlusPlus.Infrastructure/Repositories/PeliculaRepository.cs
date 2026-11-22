@@ -46,7 +46,8 @@ public class PeliculaRepository : IPeliculaRepository
         existente.Genero = pelicula.Genero;
         existente.Vista = pelicula.Vista;
         existente.Calificacion = pelicula.Calificacion;
-
+        existente.Sinopsis = pelicula.Sinopsis;
+        
         await _context.SaveChangesAsync();
     }
 

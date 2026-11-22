@@ -21,5 +21,9 @@ public class UpdatePeliculaValidator : AbstractValidator<UpdatePeliculaRequestDt
 
         RuleFor(x => x.Calificacion)
             .InclusiveBetween(0, 10);
+        
+        RuleFor(x => x.Sinopsis)
+            .MaximumLength(500)
+            .WithMessage("La sinopsis no puede superar los 500 caracteres.");
     }
 }

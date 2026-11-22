@@ -42,6 +42,9 @@ namespace CinePlusPlus.Infrastructure.Migrations
                     b.Property<string>("ImagenUrl")
                         .HasColumnType("text");
 
+                    b.Property<string>("Sinopsis")
+                        .HasColumnType("text");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasColumnType("text");

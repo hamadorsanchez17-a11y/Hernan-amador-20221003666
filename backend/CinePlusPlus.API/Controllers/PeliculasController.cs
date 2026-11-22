@@ -38,6 +38,7 @@ public class PeliculasController : ControllerBase
             Genero = p.Genero,
             Vista = p.Vista,
             Calificacion = p.Calificacion,
+			Sinopsis = p.Sinopsis,
             ImagenUrl = p.ImagenUrl
         });
 
@@ -60,6 +61,7 @@ public class PeliculasController : ControllerBase
             Genero = pelicula.Genero,
             Vista = pelicula.Vista,
             Calificacion = pelicula.Calificacion,
+			Sinopsis = pelicula.Sinopsis,
             ImagenUrl = pelicula.ImagenUrl
         };
 
@@ -83,6 +85,7 @@ public class PeliculasController : ControllerBase
             Genero = request.Genero,
             Vista = request.Vista,
             Calificacion = request.Calificacion,
+			Sinopsis = request.Sinopsis,
             ImagenUrl = request.ImagenUrl
         };
 
@@ -96,6 +99,7 @@ public class PeliculasController : ControllerBase
             Genero = peliculaCreada.Genero,
             Vista = peliculaCreada.Vista,
             Calificacion = peliculaCreada.Calificacion,
+			Sinopsis = peliculaCreada.Sinopsis,
             ImagenUrl = peliculaCreada.ImagenUrl
         };
 
@@ -126,6 +130,7 @@ public class PeliculasController : ControllerBase
         pelicula.Genero = request.Genero;
         pelicula.Vista = request.Vista;
         pelicula.Calificacion = request.Calificacion;
+		pelicula.Sinopsis = request.Sinopsis;
         pelicula.ImagenUrl = request.ImagenUrl;
 
         await _repository.UpdateAsync(pelicula);
@@ -138,6 +143,7 @@ public class PeliculasController : ControllerBase
             Genero = pelicula.Genero,
             Vista = pelicula.Vista,
             Calificacion = pelicula.Calificacion,
+			Sinopsis = pelicula.Sinopsis,
             ImagenUrl = pelicula.ImagenUrl
         };
 

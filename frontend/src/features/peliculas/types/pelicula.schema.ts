@@ -22,6 +22,9 @@ export const crearPeliculaSchema = z.object({
         .min(0, 'La calificación mínima es 0.')
         .max(10, 'La calificación máxima es 10.'),
 
+    sinopsis: z.string()
+        .max(500, 'La sinopsis no puede superar los 500 caracteres.'),
+    
     imagenUrl: z.string()
         .trim()
         .refine(

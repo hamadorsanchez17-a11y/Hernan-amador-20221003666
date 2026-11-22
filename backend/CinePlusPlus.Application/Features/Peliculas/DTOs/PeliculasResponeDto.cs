@@ -14,5 +14,7 @@ public class PeliculaResponseDto
 
     public decimal Calificacion { get; set; }
 
+	public string? Sinopsis { get; set; }
+
     public string? ImagenUrl { get; set; }
 }
