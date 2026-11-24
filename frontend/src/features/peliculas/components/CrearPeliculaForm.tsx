@@ -221,7 +221,7 @@ function CrearPeliculaForm({
                         {...register('sinopsis')}
                         rows={4}
                         maxLength={500}
-                        placeholder="Escribe una breve descripción de la película..."
+                        placeholder="Escribe tu opinion de la película..."
                         className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white outline-none focus:border-red-500 resize-y"
                     />
 
