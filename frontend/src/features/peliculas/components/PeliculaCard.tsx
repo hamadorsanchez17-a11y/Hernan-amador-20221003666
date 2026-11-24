@@ -73,7 +73,7 @@ function PeliculaCard({
 
                 <div className="bg-slate-800/70 border border-slate-700 rounded-lg p-3 mb-3 h-36 overflow-hidden">
                     <h4 className="text-xs font-semibold text-slate-300 mb-2">
-                        SINOPSIS
+                        OPINION
                     </h4>
 
                     <p className="text-xs text-slate-400 leading-relaxed max-h-24 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-600/40 scrollbar-track-transparent hover:scrollbar-thumb-slate-500/60">
