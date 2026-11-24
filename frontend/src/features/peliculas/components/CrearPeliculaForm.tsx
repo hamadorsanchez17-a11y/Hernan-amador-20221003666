@@ -214,7 +214,7 @@ function CrearPeliculaForm({
                 
                 <div>
                     <label className="block text-sm text-slate-300 mb-2">
-                        Sinopsis (opcional)
+                        Opinion (opcional)
                     </label>
 
                     <textarea
