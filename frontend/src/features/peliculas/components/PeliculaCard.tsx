@@ -81,12 +81,6 @@ function PeliculaCard({
                     </p>
                 </div>
                 
-                <div className="flex justify-between items-center mb-3">
-                    <span className="text-xs text-slate-500">
-                        ID: {pelicula.idPelicula}
-                    </span>
-                </div>
-
                 <div className="flex gap-2">
                     <button
                         onClick={() => onEditar(pelicula)}

@@ -125,7 +125,7 @@ function CrearPeliculaForm({
             className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-10"
         >
             <h2 className="text-2xl font-bold text-white mb-6">
-                {peliculaEditar ? 'Editar película' : 'Registrar película'}
+                {peliculaEditar ? 'Editar película' : 'Registrar película o serie'}
             </h2>
 
             <form onSubmit={handleSubmit(manejarSubmit)} className="space-y-5">
@@ -221,7 +221,7 @@ function CrearPeliculaForm({
                         {...register('sinopsis')}
                         rows={4}
                         maxLength={500}
-                        placeholder="Escribe tu opinion de la película..."
+                        placeholder="Escribe tu opinion de la película o serie"
                         className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white outline-none focus:border-red-500 resize-y"
                     />
 
@@ -268,7 +268,7 @@ function CrearPeliculaForm({
                     />
 
                     <label htmlFor="vista" className="text-sm text-slate-300">
-                        Ya vi esta película
+                        Ya lo vi
                     </label>
                 </div>
 

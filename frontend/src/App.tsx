@@ -100,12 +100,11 @@ function App() {
                 </p>
 
                 <h2 className="text-4xl md:text-5xl font-black mb-4">
-                    Descubrí tu próxima película favorita.
+                    Tu experencia cinematografica.
                 </h2>
 
                 <p className="text-slate-400 max-w-2xl">
-                    Explorá nuestro catálogo y encontrá historias que merecen
-                    ser vistas en la pantalla grande.
+                    Registra, califica y opina sobre tus peliculas o series favoritas
                 </p>
             </section>
 
@@ -131,13 +130,13 @@ function App() {
                         </h2>
 
                         <p className="text-slate-400 text-sm mt-1">
-                            Explorá las películas disponibles.
+                            Explorá tu historial de peliculas.
                         </p>
                     </div>
 
                     <input
                         type="text"
-                        placeholder="Buscar película..."
+                        placeholder="Buscar película o serie"
                         value={busqueda}
                         onChange={(e) => setBusqueda(e.target.value)}
                         className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white outline-none focus:border-red-500 w-full md:w-80"
